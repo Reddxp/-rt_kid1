@@ -42,7 +42,7 @@ body::before{
     100%{transform:translate(-10%,-10%);}
 }
 
-/* Landing Page */
+/* Hero Section */
 
 .hero{
     height:100vh;
@@ -73,11 +73,10 @@ h1{
     0 0 20px #00ffff;
 }
 
-h2{
+.hero h2{
     color:#ff00ff;
     margin-bottom:40px;
-    text-shadow:
-    0 0 10px #ff00ff;
+    text-shadow:0 0 10px #ff00ff;
 }
 
 .enter-btn{
@@ -88,9 +87,8 @@ h2{
     border:2px solid #00ffff;
     border-radius:50px;
     font-size:1.3rem;
-    transition:0.4s;
-    box-shadow:
-    0 0 10px #00ffff;
+    transition:.4s;
+    box-shadow:0 0 10px #00ffff;
 }
 
 .enter-btn:hover{
@@ -111,8 +109,7 @@ h2{
     color:white;
     font-size:3rem;
     margin-bottom:50px;
-    text-shadow:
-    0 0 10px #00ffff;
+    text-shadow:0 0 10px #00ffff;
 }
 
 .grid{
@@ -125,19 +122,41 @@ h2{
     overflow:hidden;
     border-radius:20px;
     border:1px solid #00ffff44;
-    transition:0.4s;
+    transition:.4s;
 }
 
 .card:hover{
     transform:translateY(-10px);
-    box-shadow:
-    0 0 20px #00ffff;
+    box-shadow:0 0 20px #00ffff;
 }
 
 .card img{
     width:100%;
-    height:100%;
     display:block;
+}
+
+/* Music Button */
+
+.music-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:60px;
+    height:60px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    color:white;
+    font-size:22px;
+    background:#111;
+    box-shadow:
+    0 0 10px #00ffff,
+    0 0 20px #00ffff;
+    z-index:1000;
+}
+
+.music-btn:hover{
+    transform:scale(1.1);
 }
 
 /* Footer */
@@ -146,7 +165,17 @@ footer{
     text-align:center;
     color:white;
     padding:40px;
-    opacity:0.7;
+    opacity:.7;
+}
+
+@media(max-width:768px){
+    h1{
+        font-size:3rem;
+    }
+
+    .gallery{
+        padding:80px 20px;
+    }
 }
 
 </style>
@@ -159,7 +188,7 @@ footer{
     <source src="Blue.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Landing -->
+<!-- Hero -->
 
 <section class="hero">
 
@@ -171,7 +200,7 @@ footer{
 
 <h2>NONCHALANT GALLERY</h2>
 
-<a href="#gallery" class="enter-btn" onclick="playMusic()">
+<a href="#gallery" class="enter-btn" onclick="startExperience()">
 ENTER GALLERY
 </a>
 
@@ -183,42 +212,27 @@ ENTER GALLERY
 
 <section id="gallery" class="gallery">
 
-<h2 class="gallery-title">
-PHOTO GALLERY
-</h2>
+<h2 class="gallery-title">PHOTO GALLERY</h2>
 
 <div class="grid">
 
-<div class="card">
-<img src="1.jpg">
-</div>
-
-<div class="card">
-<img src="2.jpg">
-</div>
-
-<div class="card">
-<img src="3.jpg">
-</div>
-
-<div class="card">
-<img src="4.jpg">
-</div>
-
-<div class="card">
-<img src="5.jpg">
-</div>
-
-<div class="card">
-<img src="6.jpg">
-</div>
-    <div class="card">
-        <img src="7.jpg">
-    </div>
+<div class="card"><img src="1.jpg" alt=""></div>
+<div class="card"><img src="2.jpg" alt=""></div>
+<div class="card"><img src="3.jpg" alt=""></div>
+<div class="card"><img src="4.jpg" alt=""></div>
+<div class="card"><img src="5.jpg" alt=""></div>
+<div class="card"><img src="6.jpg" alt=""></div>
+<div class="card"><img src="7.jpg" alt=""></div>
 
 </div>
 
 </section>
+
+<!-- Floating Music Button -->
+
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+▶
+</button>
 
 <footer>
 © 2026 @GHOST DESIGNS
@@ -226,9 +240,30 @@ PHOTO GALLERY
 
 <script>
 
-function playMusic(){
-    let music = document.getElementById("bgMusic");
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
+
+function startExperience(){
+
     music.play();
+
+    btn.innerHTML = "⏸";
+
+    document.getElementById("gallery")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+function toggleMusic(){
+
+    if(music.paused){
+        music.play();
+        btn.innerHTML="⏸";
+    }else{
+        music.pause();
+        btn.innerHTML="▶";
+    }
 }
 
 </script>
