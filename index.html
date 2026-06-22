@@ -3,192 +3,341 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@rt_KiD Gallery</title>
+<title>@rt_KiD • Art Universe</title>
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-    scroll-behavior:smooth;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
-    background:#050505;
-    overflow-x:hidden;
+background:#030303;
+color:white;
+overflow-x:hidden;
 }
 
-/* Animated Background */
+/* ==========================
+   COSMIC BACKGROUND
+========================== */
+
+#particles{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-3;
+}
 
 body::before{
-    content:"";
-    position:fixed;
-    width:200%;
-    height:200%;
-    top:0;
-    left:0;
-    background:
-    radial-gradient(circle,#00ffff22 0%,transparent 25%),
-    radial-gradient(circle,#ff00ff22 0%,transparent 25%);
-    animation:moveBg 10s linear infinite;
-    z-index:-1;
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 30%, rgba(0,255,255,.15), transparent 20%),
+radial-gradient(circle at 80% 60%, rgba(255,0,255,.15), transparent 20%);
+z-index:-2;
 }
 
-@keyframes moveBg{
-    0%{transform:translate(-10%,-10%);}
-    50%{transform:translate(-20%,-15%);}
-    100%{transform:translate(-10%,-10%);}
+/* ==========================
+   NEON STRINGS
+========================== */
+
+.string{
+position:fixed;
+top:-100%;
+width:2px;
+height:200vh;
+background:linear-gradient(
+transparent,
+cyan,
+white,
+cyan,
+transparent
+);
+opacity:.25;
+z-index:-1;
 }
 
-/* Hero Section */
+.s1{
+left:15%;
+animation:flow 12s linear infinite;
+}
+
+.s2{
+left:45%;
+animation:flow 18s linear infinite;
+}
+
+.s3{
+left:75%;
+animation:flow 14s linear infinite;
+}
+
+@keyframes flow{
+from{
+transform:translateY(-100%);
+}
+to{
+transform:translateY(100%);
+}
+}
+
+/* ==========================
+   HERO
+========================== */
 
 .hero{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
 }
 
-h1{
-    font-size:5rem;
-    color:white;
-    text-transform:uppercase;
-    letter-spacing:5px;
-    text-shadow:
-    0 0 10px #00ffff,
-    0 0 20px #00ffff,
-    0 0 40px #00ffff;
+.hero h1{
+font-size:clamp(4rem,10vw,8rem);
+letter-spacing:10px;
+text-transform:uppercase;
+
+text-shadow:
+0 0 10px cyan,
+0 0 20px cyan,
+0 0 40px cyan,
+0 0 80px cyan;
+
+animation:pulse 3s ease-in-out infinite;
 }
 
-.line{
-    width:250px;
-    height:3px;
-    margin:20px auto;
-    background:#00ffff;
-    box-shadow:
-    0 0 10px #00ffff,
-    0 0 20px #00ffff;
-}
-
-.hero h2{
-    color:#ff00ff;
-    margin-bottom:40px;
-    text-shadow:0 0 10px #ff00ff;
+.hero p{
+margin-top:20px;
+font-size:1.2rem;
+opacity:.8;
+letter-spacing:2px;
 }
 
 .enter-btn{
-    display:inline-block;
-    padding:15px 40px;
-    color:white;
-    text-decoration:none;
-    border:2px solid #00ffff;
-    border-radius:50px;
-    font-size:1.3rem;
-    transition:.4s;
-    box-shadow:0 0 10px #00ffff;
+display:inline-block;
+margin-top:40px;
+padding:16px 45px;
+border-radius:50px;
+text-decoration:none;
+color:white;
+border:1px solid rgba(255,255,255,.2);
+backdrop-filter:blur(10px);
+
+box-shadow:
+0 0 20px rgba(0,255,255,.4);
+
+transition:.4s;
 }
 
 .enter-btn:hover{
-    transform:scale(1.05);
-    box-shadow:
-    0 0 20px #00ffff,
-    0 0 40px #00ffff;
+transform:translateY(-5px) scale(1.05);
+
+box-shadow:
+0 0 30px cyan,
+0 0 60px cyan;
 }
 
-/* Gallery */
+/* ==========================
+   GALLERY
+========================== */
+
+section{
+padding:100px 8%;
+}
+
+.title{
+text-align:center;
+font-size:3rem;
+margin-bottom:60px;
+
+text-shadow:
+0 0 10px cyan;
+}
 
 .gallery{
-    padding:100px 50px;
-}
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(300px,1fr));
 
-.gallery-title{
-    text-align:center;
-    color:white;
-    font-size:3rem;
-    margin-bottom:50px;
-    text-shadow:0 0 10px #00ffff;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
+gap:25px;
 }
 
 .card{
-    overflow:hidden;
-    border-radius:20px;
-    border:1px solid #00ffff44;
-    transition:.4s;
+overflow:hidden;
+border-radius:25px;
+
+background:
+rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
+
+border:1px solid rgba(255,255,255,.1);
+
+transition:.5s;
+cursor:pointer;
 }
 
 .card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 0 20px #00ffff;
+transform:translateY(-10px);
+
+box-shadow:
+0 0 25px cyan;
 }
 
 .card img{
-    width:100%;
-    display:block;
+width:100%;
+height:350px;
+object-fit:cover;
+
+transition:.5s;
 }
 
-/* Music Button */
-
-.music-btn{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    width:60px;
-    height:60px;
-    border:none;
-    border-radius:50%;
-    cursor:pointer;
-    color:white;
-    font-size:22px;
-    background:#111;
-    box-shadow:
-    0 0 10px #00ffff,
-    0 0 20px #00ffff;
-    z-index:1000;
+.card:hover img{
+transform:scale(1.1);
 }
 
-.music-btn:hover{
-    transform:scale(1.1);
+.caption{
+padding:18px;
+text-align:center;
+font-size:1rem;
+letter-spacing:2px;
 }
 
-/* Footer */
+/* ==========================
+   ARTIST
+========================== */
+
+.artist{
+max-width:900px;
+margin:auto;
+text-align:center;
+line-height:2;
+font-size:1.1rem;
+opacity:.9;
+}
+
+/* ==========================
+   FOOTER
+========================== */
 
 footer{
-    text-align:center;
-    color:white;
-    padding:40px;
-    opacity:.7;
+padding:40px;
+text-align:center;
+opacity:.6;
 }
 
-@media(max-width:768px){
-    h1{
-        font-size:3rem;
-    }
+/* ==========================
+   LIGHTBOX
+========================== */
 
-    .gallery{
-        padding:80px 20px;
-    }
+.lightbox{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.95);
+
+display:none;
+
+justify-content:center;
+align-items:center;
+
+z-index:999;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:90%;
+border-radius:20px;
+}
+
+.close{
+position:absolute;
+top:20px;
+right:35px;
+
+font-size:50px;
+cursor:pointer;
+}
+
+/* ==========================
+   MUSIC PLAYER
+========================== */
+
+.player{
+position:fixed;
+bottom:20px;
+right:20px;
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(10px);
+
+padding:12px 18px;
+border-radius:50px;
+
+border:1px solid rgba(255,255,255,.1);
+
+z-index:99;
+}
+
+.player button{
+background:none;
+border:none;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+/* ==========================
+   ANIMATION
+========================== */
+
+@keyframes pulse{
+0%,100%{
+transform:scale(1);
+}
+50%{
+transform:scale(1.05);
+}
 }
 
 </style>
 </head>
+
 <body>
 
-<!-- Background Music -->
+<!-- MUSIC -->
 
 <audio id="bgMusic" loop>
-    <source src="Blue.mp3" type="audio/mpeg">
+<source src="dandelions.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Hero -->
+<!-- PARTICLES -->
+
+<canvas id="particles"></canvas>
+
+<!-- NEON STRINGS -->
+
+<div class="string s1"></div>
+<div class="string s2"></div>
+<div class="string s3"></div>
+
+<!-- HERO -->
 
 <section class="hero">
 
@@ -196,75 +345,254 @@ footer{
 
 <h1>@rt_KiD</h1>
 
-<div class="line"></div>
-
-<h2>NONCHALANT GALLERY</h2>
+<p>
+WELCOME TO MY UNIVERSE OF ART
+</p>
 
 <a href="#gallery" class="enter-btn" onclick="startExperience()">
-ENTER GALLERY
+ENTER THE UNIVERSE
 </a>
 
 </div>
 
 </section>
 
-<!-- Gallery -->
+<!-- GALLERY -->
 
-<section id="gallery" class="gallery">
+<section id="gallery">
 
-<h2 class="gallery-title">PHOTO GALLERY</h2>
+<h2 class="title">
+ART UNIVERSE
+</h2>
 
-<div class="grid">
+<div class="gallery">
 
-<div class="card"><img src="1.jpg" alt=""></div>
-<div class="card"><img src="2.jpg" alt=""></div>
-<div class="card"><img src="3.jpg" alt=""></div>
-<div class="card"><img src="4.jpg" alt=""></div>
-<div class="card"><img src="5.jpg" alt=""></div>
-<div class="card"><img src="6.jpg" alt=""></div>
-<div class="card"><img src="7.jpg" alt=""></div>
+<div class="card">
+<img src="1.jpg" onclick="openImage(this.src)">
+<div class="caption">MASTERPIECE I</div>
+</div>
+
+<div class="card">
+<img src="2.jpg" onclick="openImage(this.src)">
+<div class="caption">MASTERPIECE II</div>
+</div>
+
+<div class="card">
+<img src="3.jpg" onclick="openImage(this.src)">
+<div class="caption">MASTERPIECE III</div>
+</div>
+
+<div class="card">
+<img src="4.jpg" onclick="openImage(this.src)">
+<div class="caption">MASTERPIECE IV</div>
+</div>
+
+<div class="card">
+<img src="5.jpg" onclick="openImage(this.src)">
+<div class="caption">MASTERPIECE V</div>
+</div>
+
+<div class="card">
+<img src="6.jpg" onclick="openImage(this.src)">
+<div class="caption">MASTERPIECE VI</div>
+</div>
+
+<div class="card">
+    <img src="7.jpg" onclick="openimage(this.src)">
+    <div class="caption">MASTERPIECE VII</div>
+</div>
+
+<div class="card">
+    <img src="8.jpeg" onclick="openImage(this.src)">
+</div>
 
 </div>
 
 </section>
 
-<!-- Floating Music Button -->
+<!-- ABOUT -->
 
-<button class="music-btn" id="musicBtn" onclick="toggleMusic()">
-▶
-</button>
+<section>
+
+<h2 class="title">
+THE ARTIST
+</h2>
+
+<div class="artist">
+
+Every image tells a story.
+
+This universe was created by
+<b>@rt_KiD</b> to showcase creativity,
+emotion, memories and imagination.
+
+Explore, dream and lose yourself
+inside the art.
+
+</div>
+
+</section>
 
 <footer>
-© 2026 @GHOST DESIGNS
+
+© 2026 GHOST DESIGNS • ART UNIVERSE • Freddie Rian • Redd_Xp
+
 </footer>
+
+<!-- PLAYER -->
+
+<div class="player">
+<button onclick="toggleMusic()">🎵</button>
+</div>
+
+<!-- LIGHTBOX -->
+
+<div class="lightbox" id="lightbox">
+
+<span class="close" onclick="closeImage()">
+&times;
+</span>
+
+<img id="lightboxImg">
+
+</div>
 
 <script>
 
-const music = document.getElementById("bgMusic");
-const btn = document.getElementById("musicBtn");
+/* ==========================
+   MUSIC
+========================== */
+
+const music =
+document.getElementById("bgMusic");
 
 function startExperience(){
-
-    music.play();
-
-    btn.innerHTML = "⏸";
-
-    document.getElementById("gallery")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
+music.play();
 }
 
 function toggleMusic(){
 
-    if(music.paused){
-        music.play();
-        btn.innerHTML="⏸";
-    }else{
-        music.pause();
-        btn.innerHTML="▶";
-    }
+if(music.paused){
+music.play();
+}else{
+music.pause();
 }
+
+}
+
+/* ==========================
+   LIGHTBOX
+========================== */
+
+function openImage(src){
+
+document.getElementById(
+"lightbox"
+).style.display="flex";
+
+document.getElementById(
+"lightboxImg"
+).src=src;
+
+}
+
+function closeImage(){
+
+document.getElementById(
+"lightbox"
+).style.display="none";
+
+}
+
+/* ==========================
+   PARTICLES
+========================== */
+
+const canvas =
+document.getElementById("particles");
+
+const ctx =
+canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<180;i++){
+
+particles.push({
+
+x:Math.random()*canvas.width,
+
+y:Math.random()*canvas.height,
+
+size:Math.random()*3+1,
+
+speed:Math.random()*1.5+0.2
+
+});
+
+}
+
+function animate(){
+
+ctx.clearRect(
+0,0,
+canvas.width,
+canvas.height
+);
+
+particles.forEach(p=>{
+
+ctx.beginPath();
+
+ctx.arc(
+p.x,
+p.y,
+p.size,
+0,
+Math.PI*2
+);
+
+ctx.fillStyle=
+"rgba(0,255,255,.8)";
+
+ctx.fill();
+
+p.y-=p.speed;
+
+if(p.y<0){
+
+p.y=canvas.height;
+
+p.x=
+Math.random()*canvas.width;
+
+}
+
+});
+
+requestAnimationFrame(
+animate
+);
+
+}
+
+animate();
+
+window.addEventListener(
+"resize",
+()=>{
+
+canvas.width=
+window.innerWidth;
+
+canvas.height=
+window.innerHeight;
+
+}
+);
 
 </script>
 
